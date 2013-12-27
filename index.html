@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="arco-web">
+<html ng-app="arco">
 
 <head>
   <meta charset="utf-8">
@@ -11,7 +11,7 @@
   <link rel="stylesheet" type="text/css" href="css/brackets.css">
 </head>
 
-<body class="dark">
+<body class="dark" ng-controller="AppCtrl">
   <div id="wrapper">
     <div class="max-width">
       <div id="siteNav">
@@ -29,10 +29,9 @@
     <div id="content" class="max-width" ng-view></div>
   </div>
 
-  <script src="//code.angularjs.org/1.2.6/angular.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/coffee-script/1.6.3/coffee-script.min.js"></script>
-  <script type="text/coffeescript" src="script/app.coffee"></script>
-  <!-- // <script src="script/app.js"></script> -->
+  <script src="//code.angularjs.org/1.2.6/angular.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.6/angular-route.js"></script>
+  <script src="script/app.js"></script>
 </body>
 
 </html>
