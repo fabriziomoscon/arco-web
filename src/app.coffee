@@ -8,14 +8,17 @@ app.config ['$routeProvider',
       .when('/', {
         templateUrl: 'index.html',
         controller: 'HomeCtrl'
+        controllerAs: 'home'
       })
       .when('/login', {
         templateUrl: 'partials/auth/login.html',
         controller: 'AuthLoginCtrl'
+        controllerAs: 'auth'
       })
       .when('/my-scores', {
         templateUrl: 'partials/score/list.html',
         controller: 'ScoreListCtrl'
+        controllerAs: 'score'
       })
       .otherwise({
         redirectTo: '/'
@@ -33,17 +36,33 @@ app.controller 'HomeCtrl', ['$scope', ($scope) ->
 
 ]
 
-app.controller 'ScoreListCtrl', ['$scope', 'Score', ($scope, Score) ->
+# app.controller 'ScoreListCtrl', ['$scope', 'Score', ($scope, Score) ->
 
-  $scope.scores = []
+#   $scope.scores = []
 
-]
+# ]
 
 # new feature AnyController as any doesn't need to inject $scope
 app.controller 'AuthLoginCtrl', ['Auth', (Auth) ->
 
   return {
-    login: Auth.login
+
+    login: (email, password) ->
+      Auth.login(
+        email
+        password
+        (data, status, headers, config) ->
+          console.log headers()
+          console.log config
+          console.log 'LOGIN success', data
+          # redirect to /
+        (data, status, headers, config) =>
+          console.log status
+          console.log 'LOGIN error', data
+          @errors = data.error
+      )
+
+    errors: undefined
   }
 
 ]
@@ -68,16 +87,11 @@ app.factory 'Score', ['$http', ($http) ->
 app.factory 'Auth', ['$http', 'Routes', ($http, Routes) ->
 
   return {
-    login: (email, password) ->
+
+    login: (email, password, callback, errorBack) ->
+
       $http.post( Routes.authLogin, {email, password} )
-        .success( (data, status, headers, config) ->
-          console.log headers()
-          console.log config
-          console.log 'LOGIN success', data
-        )
-        .error( (data, status, headers, config) ->
-          console.log status
-          console.log 'LOGIN error', data
-        )
+        .success( callback )
+        .error( errorBack )
   }
 ]

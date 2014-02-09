@@ -7,13 +7,16 @@ app.config([
   '$routeProvider', function($routeProvider) {
     return $routeProvider.when('/', {
       templateUrl: 'index.html',
-      controller: 'HomeCtrl'
+      controller: 'HomeCtrl',
+      controllerAs: 'home'
     }).when('/login', {
       templateUrl: 'partials/auth/login.html',
-      controller: 'AuthLoginCtrl'
+      controller: 'AuthLoginCtrl',
+      controllerAs: 'auth'
     }).when('/my-scores', {
       templateUrl: 'partials/score/list.html',
-      controller: 'ScoreListCtrl'
+      controller: 'ScoreListCtrl',
+      controllerAs: 'score'
     }).otherwise({
       redirectTo: '/'
     });
@@ -30,16 +33,22 @@ app.controller('AppCtrl', [
 
 app.controller('HomeCtrl', ['$scope', function($scope) {}]);
 
-app.controller('ScoreListCtrl', [
-  '$scope', 'Score', function($scope, Score) {
-    return $scope.scores = [];
-  }
-]);
-
 app.controller('AuthLoginCtrl', [
   'Auth', function(Auth) {
     return {
-      login: Auth.login
+      login: function(email, password) {
+        var _this = this;
+        return Auth.login(email, password, function(data, status, headers, config) {
+          console.log(headers());
+          console.log(config);
+          return console.log('LOGIN success', data);
+        }, function(data, status, headers, config) {
+          console.log(status);
+          console.log('LOGIN error', data);
+          return _this.errors = data.error;
+        });
+      },
+      errors: void 0
     };
   }
 ]);
@@ -63,18 +72,11 @@ app.factory('Score', [
 app.factory('Auth', [
   '$http', 'Routes', function($http, Routes) {
     return {
-      login: function(email, password) {
+      login: function(email, password, callback, errorBack) {
         return $http.post(Routes.authLogin, {
           email: email,
           password: password
-        }).success(function(data, status, headers, config) {
-          console.log(headers());
-          console.log(config);
-          return console.log('LOGIN success', data);
-        }).error(function(data, status, headers, config) {
-          console.log(status);
-          return console.log('LOGIN error', data);
-        });
+        }).success(callback).error(errorBack);
       }
     };
   }
