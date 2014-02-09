@@ -10,18 +10,12 @@
     "url": "https://github.com/fabriziomoscon/arco-web"
   },
   "scripts": {
-    "watch-coffee": "watchify -t coffeeify src/app.coffee -o script/app.js -v --extension .coffee",
-    "compile-coffee": "browserify -t coffeeify src/x.coffee -o dist/js/bundle.js",
-    "build": "npm run compile-coffee",
-    "dev": "npm run watch-coffee & python -m SimpleHTTPServer 9999"
+    "start": "make && python -m SimpleHTTPServer 9999"
   },
   "dependencies": {
-    "browserify": "3.0.x",
-    "gulp": "3.0.x"
   },
   "devDependencies": {
-    "coffee-script": "1.6.x",
-    "coffeeify": "0.5.x",
-    "watchify": "0.4.x"
+    "browserify": "3.0.x",
+    "coffee-script": "1.6.x"
   }
 }

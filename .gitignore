@@ -1,4 +1,7 @@
 node_modules
 npm-debug.log
 
+arco-web.xdk
+
 script/app.js
+build

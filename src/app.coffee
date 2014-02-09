@@ -5,21 +5,21 @@ app = angular.module 'arco', [
 app.config ['$routeProvider',
   ($routeProvider) ->
     $routeProvider
-      .when('/', {
-        templateUrl: 'index.html',
-        controller: 'HomeCtrl'
-        controllerAs: 'home'
-      })
+      # .when('/', {
+      #   templateUrl: 'index.html',
+      #   controller: 'HomeCtrl'
+      #   controllerAs: 'home'
+      # })
       .when('/login', {
         templateUrl: 'partials/auth/login.html',
         controller: 'AuthLoginCtrl'
         controllerAs: 'auth'
       })
-      .when('/my-scores', {
-        templateUrl: 'partials/score/list.html',
-        controller: 'ScoreListCtrl'
-        controllerAs: 'score'
-      })
+      # .when('/my-scores', {
+      #   templateUrl: 'partials/score/list.html',
+      #   controller: 'ScoreListCtrl'
+      #   controllerAs: 'score'
+      # })
       .otherwise({
         redirectTo: '/'
       })
@@ -32,15 +32,19 @@ app.controller 'AppCtrl', ['$rootScope', ($rootScope) ->
 
 ]
 
-app.controller 'HomeCtrl', ['$scope', ($scope) ->
+app.controller 'HomeCtrl', [ () ->
+
+  return {}
 
 ]
 
-# app.controller 'ScoreListCtrl', ['$scope', 'Score', ($scope, Score) ->
+app.controller 'ScoreListCtrl', ['Score', (Score) ->
 
-#   $scope.scores = []
+  return {
+    scores: []
+  }
 
-# ]
+]
 
 # new feature AnyController as any doesn't need to inject $scope
 app.controller 'AuthLoginCtrl', ['Auth', (Auth) ->
