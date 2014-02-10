@@ -14,10 +14,9 @@ all: $(app_bundle)
 	mkdir -p $(dir $@)
 	coffee -co $(dir $@) $<
 
-
 $(app_bundle): $(build_files)
 	mkdir -p $(dir $@)
 	browserify -o $@ $^
 
 clean:
-	rm -rf .build
+	rm -rf .build $(app_bundle)

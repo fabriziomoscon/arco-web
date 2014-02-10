@@ -3,5 +3,5 @@ npm-debug.log
 
 arco-web.xdk
 
-script/app.js
+public/script/app.js
 .build
