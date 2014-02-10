@@ -4,9 +4,16 @@ var watch = require('watch')
   , execMake
 ;
 
-execMake = function() {
+execMake = function( filename, clean ) {
 
-  var child = exec('make clean && make', function (error, stdout, stderr) {
+  console.log( 'make: ' + filename );
+
+  var cmd = "make coffee-compile filename=" + filename;
+  if ( clean == true) {
+    cmd = "make clean filename=" + filename + " && " + cmd
+  }
+
+  var child = exec(cmd, function (error, stdout, stderr) {
     
     console.log("===========================================================>");
     console.log(stdout);
@@ -23,16 +30,16 @@ execMake = function() {
 
 watch.createMonitor( dir, function (monitor) {
 
-  monitor.on("created", function (f, stat) {
-    execMake();
+  monitor.on("created", function (filename, stat) {
+    execMake( filename, false );
   });
 
-  monitor.on("changed", function (f, curr, prev) {
-    execMake();
+  monitor.on("changed", function (filename, curr, prev) {
+    execMake( filename, true );
   });
 
-  monitor.on("removed", function (f, stat) {
-    execMake();
+  monitor.on("removed", function (filename, stat) {
+    execMake( filename, true );
   });
 
 });

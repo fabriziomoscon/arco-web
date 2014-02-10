@@ -6,7 +6,7 @@ build_files  := $(source_files:%.coffee=.build/%.js)
 app_bundle := public/script/app.js
 
 
-.PHONY: all clean
+.PHONY: all clean coffee-compile
 
 all: $(app_bundle)
 
@@ -18,5 +18,9 @@ $(app_bundle): $(build_files)
 	mkdir -p $(dir $@)
 	browserify -o $@ $^
 
+coffee-compile:
+	coffee $(filename) -co $(filename:%.coffee=.build/%.js)
+	browserify -o $(app_bundle) $(build_files)
+
 clean:
-	rm -rf .build $(app_bundle)
+	rm -rf .build/$(filename) $(app_bundle)
