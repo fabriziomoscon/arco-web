@@ -18,7 +18,6 @@
   "devDependencies": {
     "browserify": "~3.0.0",
     "coffee-script": "~1.7.0",
-    "connect": "~2.12.0",
-    "watch": "~0.9.0"
+    "connect": "~2.12.0"
   }
 }
