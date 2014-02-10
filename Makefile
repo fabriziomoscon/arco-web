@@ -1,8 +1,6 @@
 export PATH := node_modules/.bin:$(PATH)
 
 source_files := $(shell find src/ -type f -name '*.coffee')
-build_files  := $(source_files:%.coffee=.build/%.js)
-
 app_bundle := public/script/app.js
 
 
@@ -10,14 +8,9 @@ app_bundle := public/script/app.js
 
 all: $(app_bundle)
 
-.build/%.js: %.coffee
+$(app_bundle):
 	mkdir -p $(dir $@)
-	coffee -co $(dir $@) $<
-
-
-$(app_bundle): $(build_files)
-	mkdir -p $(dir $@)
-	browserify -o $@ $^
+	watchify $(source_files) -o $@ -t coffeeify -v --extension=".coffee" &
 
 clean:
-	rm -rf .build
+	rm -rf $(app_bundle)

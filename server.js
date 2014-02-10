@@ -1,5 +1,6 @@
 var connect = require('connect')
   , http = require('http')
+  , port = 9999
 ;
 
 var app = connect()
@@ -8,4 +9,6 @@ var app = connect()
   .use( connect.directory('public') )
 ;
 
-http.createServer( app ).listen( 9999 );
+http.createServer( app ).listen( port, function () {
+  console.log( "Listening on port " + port );
+} );
