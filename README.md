@@ -9,7 +9,7 @@ npm install
 
 ## start
 ```bash
-npm run dev
+npm start
 ```
 
 ## LICENSE

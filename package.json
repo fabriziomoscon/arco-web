@@ -10,12 +10,12 @@
     "url": "https://github.com/fabriziomoscon/arco-web"
   },
   "scripts": {
-    "start": "make && python -m SimpleHTTPServer 9999"
+    "start": "make && node server.js"
   },
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
-    "browserify": "3.0.x",
-    "coffee-script": "1.6.x"
+    "browserify": "~3.0.0",
+    "coffee-script": "~1.6.0",
+    "connect": "~2.12.0"
   }
 }
