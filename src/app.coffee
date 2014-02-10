@@ -34,7 +34,6 @@ app.controller 'AppCtrl', ['$rootScope', ($rootScope) ->
 
 app.controller 'HomeCtrl', [ () ->
 
-  121233123
   return {}
 
 ]
