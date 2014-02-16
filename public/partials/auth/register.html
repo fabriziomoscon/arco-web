@@ -2,6 +2,14 @@
 
   <div>
     <form>
+      <label for="first name">
+        First name
+        <input type="text" name="first name" value="Your first name" ng-model="first_name" />
+      </label>
+      <label for="last name">
+        Last name
+        <input type="text" name="last name" value="Your last name" ng-model="last_name" />
+      </label>
       <label for="email">
         Email
         <input type="email" name="email" value="Your email" ng-model="email" />
@@ -11,7 +19,7 @@
         <input type="password" name="password" value="Your password" ng-model="password" />
       </label>
       <label>
-        <button ng-click="auth.login(email, password)">Login</button>
+        <button ng-click="auth.register(fisrt_name, last_name, email, password)">Register</button>
       </label>
     </form>
   </div>
