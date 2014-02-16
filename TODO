@@ -1,12 +1,11 @@
 # angular
 
-  * find the best way to link pages => / or #
+  * research what is the best way to link pages => / or #
   * figure out why there is an infinite redirection for / and otherwise
-  * separate the app into different file => check coffee -cwj still works as expected since the file order might cause issues
   * figure out how to render public page such as register/login without #
-  * implement logout feature
+  * implement logout feature/logic
   * use ngCookies to store local session or localStorage for multiple tabs
-  * implemnt user access roles -> maybe it is better to leave the admin on another website to keep responsibilities isolated
+  * implement user access roles -> maybe it is better to avoid administration responsibilities to leak into this project though
 
 # HTML
 
