@@ -38,13 +38,10 @@ app.config ['$routeProvider', '$locationProvider'
 app.run ['$rootScope', '$location', 'Auth', ($rootScope, $location, Auth) ->
 
   $rootScope.$on '$routeChangeStart', (event, next, current) ->
-    console.log '$routeChangeStart', next
     unless Auth.authorize(next.access)
       if Auth.isLoggedIn($rootScope.user)
-        console.log 'LOGGED IN'
         $location.path('/my-scores')
       else
-        console.log 'NOT LOGGED IN'
         $location.path('/login')
 
 ]
