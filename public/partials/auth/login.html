@@ -2,13 +2,13 @@
 
   <div>
     <form>
-      <label for="email">
+      <label for="login">
         Email
-        <input type="email" name="email" value="Your email" ng-model="email" />
+        <input type="email" name="login" value="Your email" ng-model="email" required />
       </label>
       <label for="password">
         Password
-        <input type="password" name="password" value="Your password" ng-model="password" />
+        <input type="password" name="password" value="Your password" ng-model="password" required />
       </label>
       <label>
         <button ng-click="auth.login(email, password)">Login</button>

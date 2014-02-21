@@ -5,11 +5,12 @@ app = angular.module('arco', [
 app.config ['$routeProvider', '$locationProvider'
   ($routeProvider, $locationProvider) ->
     $routeProvider
-      # .when('/', {
-      #   templateUrl:          'index.html',
-      #   controller:           'HomeCtrl'
-      #   controllerAs:         'home'
-      # })
+      .when('/', {
+        templateUrl:          'home.html',
+        controller:           'HomeCtrl'
+        controllerAs:         'home'
+        access:               'public'
+      })
       .when('/login', {
         templateUrl:          'partials/auth/login.html',
         controller:           'AuthCtrl'
@@ -28,18 +29,16 @@ app.config ['$routeProvider', '$locationProvider'
         controllerAs:         'score'
         access:               'private'
       })
-      # .otherwise({
-      #   redirectTo: '/notFound'
-      # })
 
-    # $locationProvider.html5Mode(true).hashPrefix('!')
+    $locationProvider.html5Mode(true).hashPrefix('!')
 ]
 
 app.run ['$rootScope', '$location', 'Auth', ($rootScope, $location, Auth) ->
 
   $rootScope.$on '$routeChangeStart', (event, next, current) ->
+
     unless Auth.authorize(next.access)
-      if Auth.isLoggedIn($rootScope.user)
+      if Auth.isLoggedIn()
         $location.path('/my-scores')
       else
         $location.path('/login')
