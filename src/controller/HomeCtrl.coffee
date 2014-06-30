@@ -1,4 +1,4 @@
-angular.module('arco').controller 'HomeCtrl', [ () ->
+app.controller 'HomeCtrl', [ () ->
 
   return {}
 

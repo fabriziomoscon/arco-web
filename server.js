@@ -1,14 +1,15 @@
-var connect = require('connect')
-  , http = require('http')
-  , port = 9999
-;
+var connect = require('connect');
+var express = require('express');
+var app = express();
+var PORT = 9999;
 
-var app = connect()
-  .use( connect.logger('dev') )
-  .use( connect.static('public') )
-  .use( connect.directory('public') )
-;
+app.use( connect.logger('dev') );
+app.use( express.static(__dirname + '/public') );
 
-http.createServer( app ).listen( port, function () {
-  console.log( "Listening on port " + port );
-} );
+app.use( function(req, res, next) {
+  res.sendfile(__dirname + '/public/index.html');
+});
+
+app.listen( PORT, function() {
+  console.log( "Listening on port " + PORT );
+});

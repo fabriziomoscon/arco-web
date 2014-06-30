@@ -1,4 +1,4 @@
-angular.module('arco').controller 'AuthCtrl', ['$cookieStore', '$location', 'Auth', '$rootScope', ($cookieStore, $location, Auth, $rootScope) ->
+app.controller 'AuthCtrl', ['$location', 'Auth', '$rootScope', ($location, Auth, $rootScope) ->
 
   return {
 
@@ -6,13 +6,13 @@ angular.module('arco').controller 'AuthCtrl', ['$cookieStore', '$location', 'Aut
       Auth.login(
         email
         password
-        (data, status, headers, config) ->
-          $cookieStore.put 'user', {first_name: data.first_name, last_name: data.last_name}
-          $rootScope.user = {first_name: data.first_name, last_name: data.last_name}
-          $location.path('/my-scores')
+        (err, user) ->
+          if err?
+            return @errors = err
 
-        (data, status, headers, config) =>
-          @errors = data.error
+          $rootScope.user = user
+          $location.path $rootScope.localurl.my_scores
+          return
       )
 
 
@@ -22,12 +22,12 @@ angular.module('arco').controller 'AuthCtrl', ['$cookieStore', '$location', 'Aut
     logout: () ->
       delete $rootScope.user
       Auth.logout(
-        (data, status, headers, config) ->
-          $cookieStore.remove 'user'
-          $location.path '/login'
-        (data, status, headers, config) ->
-          $cookieStore.remove 'user'
-          $location.path '/login'
+        (err, success) ->
+          if err?
+            return @errors = err
+
+          $location.path $rootScope.localurl.home
+          return
       )
 
 

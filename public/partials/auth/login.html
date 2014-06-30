@@ -1,18 +1,24 @@
 <div ng-controller="AuthCtrl as auth">
 
   <div>
-    <form>
-      <label for="login">
-        Email
-        <input type="email" name="login" value="Your email" ng-model="email" required />
-      </label>
-      <label for="password">
-        Password
-        <input type="password" name="password" value="Your password" ng-model="password" required />
-      </label>
-      <label>
-        <button ng-click="auth.login(email, password)">Login</button>
-      </label>
+    <form ng-submit="auth.login(email, password)">
+
+      <div>
+        <label for="login">
+          Email
+          <input type="email" name="login" value="Your email" ng-model="email" required />
+        </label>
+      </div>
+
+      <div>
+        <label for="password">
+          Password
+          <input type="password" name="password" value="Your password" ng-model="password" required />
+        </label>
+      </div>
+
+      <input type="submit" value="Login" />
+
     </form>
   </div>
 
